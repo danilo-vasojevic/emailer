@@ -1,0 +1,19 @@
+{
+  "name": "emailer",
+  "version": "1.0.0",
+  "description": "Send an nice email to someone",
+  "main": "index.ts",
+  "author": "Danilo Vasojevic",
+  "license": "MIT",
+  "scripts": {
+    "start": "npx ts-node index.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.1",
+    "nodemailer": "^6.9.8",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.14"
+  }
+}
