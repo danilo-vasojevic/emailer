@@ -1,32 +1,33 @@
 import * as nodemailer from 'nodemailer'
 import * as dotenv from 'dotenv'
 
-dotenv.config({ path: 'secrets/danilo.secret' })
+dotenv.config({ path: 'secrets/sample.secret' })
 
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-        user: process.env.USER,
-        pass: process.env.PASS,
-    },
-})
+const recipient = process.env.RECIPIENT
+const user = process.env.USER
+const pass = process.env.PASS
 
 async function main() {
-    const info = await transporter.sendMail({
-        from: `"Danilo 👻" <${process.env.USER}>`,
-        to: 'brmoslav@gmail.com',
-        subject: 'Hello ✔',
-        text: 'Hello world',
-        html: `<h1>Hello world from ${process.env.USER}</h1>`,
-        attachments: [
-            {
-                filename: 'importantFile.txt',
-                path: 'attachment.txt'
-            }
-        ]
-    })
+    const info = await nodemailer
+        .createTransport({
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
+            auth: { user, pass },
+        })
+        .sendMail({
+            to: recipient,
+            from: `"Anonymous 👻" <${user}>`,
+            subject: 'Hello ✔',
+            text: 'Hello world',
+            html: `<h2>Hello from ${user}</h2>`,
+            attachments: [
+                {
+                    filename: 'importantFile.txt',
+                    path: 'attachment.txt',
+                },
+            ],
+        })
 }
 
 main().catch(console.error)
